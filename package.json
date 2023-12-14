@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "engines": {
+    "node": ">=v18.17.1"
+  },
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@codemirror/lang-markdown": "^6.2.3",
+    "@codemirror/language": "^6.9.3",
+    "@codemirror/state": "^6.3.3",
+    "@codemirror/view": "^6.22.3",
+    "@iconify-json/heroicons": "^1.1.13",
+    "@iconify-json/heroicons-outline": "^1.1.7",
+    "@iconify-json/mdi": "^1.1.55",
+    "@nuxthq/ui": "^1.2.10",
+    "@nuxtjs/color-mode": "^3.3.2",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/supabase": "^1.1.3",
+    "@retronav/ixora": "^0.3.3",
+    "codemirror": "^6.0.1",
+    "eslint": "^8.53.0",
+    "nuxt": "^3.8.1",
+    "typescript": "^5.2.2"
+  },
+  "resolutions": {
+    "consola": "^3.0.0"
+  }
+}
