@@ -22,7 +22,7 @@ watchEffect(() => {
         icon="i-mdi-github"
         block
         label="Github"
-        variant="black"
+        color="black"
         @click="auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })"
       />
     </LoginCard>

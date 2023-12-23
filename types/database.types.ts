@@ -31,6 +31,41 @@ export interface Database {
           title?: string | null
           user?: string
         }
+      },
+      notes: {
+        Row: {
+          id: number
+          title: string
+          user_id: string
+          created_at: Date
+          modified_at: Date
+          content: string
+          directory: string
+          metadata: any
+          hash: string
+        },
+        Insert: {
+          id?: number
+          title: string
+          user_id: string
+          created_at?: Date
+          modified_at?: Date
+          content?: string
+          directory?: string
+          metadata?: any
+          hash?: string
+        },
+        Update: {
+          id?: number
+          title?: string
+          user_id?: string
+          created_at?: Date
+          modified_at?: Date
+          content?: string
+          directory?: string
+          metadata?: any
+          hash?: string
+        }
       }
     }
     Views: {

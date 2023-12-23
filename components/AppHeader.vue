@@ -18,43 +18,41 @@ const logout = async () => {
 <template>
   <div>
     <Title>Nuxt 3 x Supabase</Title>
-    <div class="flex items-center md:justify-between justify-center">
+    <div class="flex items-center md:justify-between justify-center top-bar">
       <div class="hidden md:block">
         <UButton
           label="Source"
-          variant="transparent"
+          color="white"
+          variant="ghost"
           target="_blank"
-          to="https://github.com/nuxt-modules/supabase/tree/main/demo"
+          to="https://github.com/widcardw/supa-note"
           icon="i-heroicons-outline-external-link"
         />
         <UButton
           label="Hosted on Netlify"
-          variant="transparent"
+          color="white"
+          variant="ghost"
           target="_blank"
           to="https://netlify.com"
           icon="i-heroicons-outline-external-link"
         />
       </div>
       <div class="flex items-center">
-        <a target="_blank" :href="'https://github.com/' + user.user_metadata.user_name">
-          <UButton variant="transparent">
-            <img
-              :src="user.user_metadata.avatar_url"
-              width="20"
-              height="20"
-              class="rounded-full"
-            >
+        <a target="_blank" :href="'https://github.com/' + user?.user_metadata?.user_name || ''">
+          <UButton variant="ghost">
+            <UAvatar size="xs" :src="user?.user_metadata?.avatar_url || ''" alt="User" />
           </UButton>
         </a>
         <UButton
-          variant="transparent"
+          color="white"
+          variant="ghost"
           :icon="colorModeIcon"
           @click="toggleDark"
         />
         <UButton
           v-if="user"
-          class="u-text-white"
-          variant="transparent"
+          color="white"
+          variant="ghost"
           @click="logout"
         >
           Logout
@@ -65,7 +63,7 @@ const logout = async () => {
 </template>
 
 <style scoped>
-.rounded-full {
-  border-radius: 10rem;
+.top-bar {
+  box-shadow: 0 1px 0 0 #77777720;
 }
 </style>

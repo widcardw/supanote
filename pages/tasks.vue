@@ -53,97 +53,99 @@ const fetchTasksFromServerRoute = async () => {
 </script>
 
 <template>
-  <div class="w-full my-[50px]">
-    <h1 class="mb-12 text-6xl font-bold u-text-white">
-      Todo List.
-    </h1>
-    <form
-      class="flex gap-2 my-2"
-      @submit.prevent="addTask"
-    >
-      <UInput
-        v-model="newTask"
-        :loading="loading"
-        class="w-full"
-        size="xl"
-        variant="white"
-        type="text"
-        name="newTask"
-        placeholder="Make a coffee"
-        autofocus
-        autocomplete="off"
-      />
-      <UButton
-        type="submit"
-        variant="white"
+  <NuxtLayout name="centered">
+    <div class="w-full my-[50px]">
+      <h1 class="mb-12 text-6xl font-bold">
+        Todo List.
+      </h1>
+      <form
+        class="flex gap-2 my-2"
+        @submit.prevent="addTask"
       >
-        Add
-      </UButton>
-    </form>
-    <UCard
-      v-if="tasks?.length > 0"
-      body-class="px-6 py-2 overflow-hidden"
-    >
-      <ul>
-        <li
-          v-for="task of tasks"
-          :key="task.id"
-          class="border-b border-gray-200 divide-y divide-gray-200"
+        <UInput
+          v-model="newTask"
+          :loading="loading"
+          class="w-full"
+          size="xl"
+          variant="outline"
+          type="text"
+          name="newTask"
+          placeholder="Make a coffee"
+          autofocus
+          autocomplete="off"
+        />
+        <UButton
+          type="submit"
+          variant="solid"
         >
-          <div class="py-2">
-            <UFormGroup
-              :label-class="`block font-medium ${task.completed ? 'line-through u-text-gray-500' : 'u-text-gray-700'}`"
-              :label="task.title"
-              :name="String(task.id)"
-              wrapper-class="flex items-center justify-between w-full"
-            >
-              <div class="flex items-center justify-between">
-                <div @click="completeTask(task)">
-                  <UToggle
-                    v-model="task.completed"
-                    :name="String(task.id)"
-                    icon-off="heroicons-solid:x"
-                    icon-on="heroicons-solid:check"
+          Add
+        </UButton>
+      </form>
+      <UCard
+        v-if="tasks?.length > 0"
+        body-class="px-6 py-2 overflow-hidden"
+      >
+        <ul>
+          <li
+            v-for="task of tasks"
+            :key="task.id"
+            class="border-b border-gray-200 divide-y divide-gray-200"
+          >
+            <div class="py-2">
+              <UFormGroup
+                :label-class="`block font-medium ${task.completed ? 'line-through u-text-gray-500' : 'u-text-gray-700'}`"
+                :label="task.title"
+                :name="String(task.id)"
+                wrapper-class="flex items-center justify-between w-full"
+              >
+                <div class="flex items-center justify-between">
+                  <div @click="completeTask(task)">
+                    <UToggle
+                      v-model="task.completed"
+                      :name="String(task.id)"
+                      icon-off="heroicons-solid:x"
+                      icon-on="heroicons-solid:check"
+                    />
+                  </div>
+                  <UButton
+                    class="ml-3 text-red-600"
+                    size="sm"
+                    variant="ghost"
+                    icon="i-heroicons-outline-trash"
+                    @click="removeTask(task)"
                   />
                 </div>
-                <UButton
-                  class="ml-3 text-red-600"
-                  size="sm"
-                  variant="transparent"
-                  icon="i-heroicons-outline-trash"
-                  @click="removeTask(task)"
-                />
-              </div>
-            </UFormGroup>
-          </div>
-        </li>
-      </ul>
-    </UCard>
-    <UButton
-      class="mt-6"
-      label="Fetch tasks from Nuxt server route"
-      @click="fetchTasksFromServerRoute"
-    />
-    <UModal v-model="isModalOpen">
-      <h2 class="mb-4">
-        Tasks fetched from
-        <a
-          href="https://nuxt.com/docs/guide/directory-structure/server"
-          target="_blank"
-          class="text-primary-500 underline"
-        >Nuxt Server route</a>
-        with the use of the
-        <a
-          href="https://supabase.nuxtjs.org/usage/services/server-supabase-client"
-          target="_blank"
-          class="text-primary-500 underline"
-        >serverSupabaseClient</a>:
-      </h2>
-      <pre>
+              </UFormGroup>
+            </div>
+          </li>
+        </ul>
+      </UCard>
+      <UButton
+        class="mt-6"
+        label="Fetch tasks from Nuxt server route"
+        @click="fetchTasksFromServerRoute"
+      />
+      <UModal v-model="isModalOpen">
+        <h2 class="mb-4">
+          Tasks fetched from
+          <a
+            href="https://nuxt.com/docs/guide/directory-structure/server"
+            target="_blank"
+            class="text-primary-500 underline"
+          >Nuxt Server route</a>
+          with the use of the
+          <a
+            href="https://supabase.nuxtjs.org/usage/services/server-supabase-client"
+            target="_blank"
+            class="text-primary-500 underline"
+          >serverSupabaseClient</a>:
+        </h2>
+        <pre>
         {{ tasksFromServer }}
       </pre>
-    </UModal>
-  </div>
+      </UModal>
+    </div>
+  </NuxtLayout>
 </template>
 
 <style lang="postcss">
