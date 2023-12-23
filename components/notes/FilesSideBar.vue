@@ -11,7 +11,7 @@ const emits = defineEmits<
 </script>
 
 <template>
-  <div class="gap-2 bordered-right overflow-y-auto">
+  <div class="gap-2 bordered-right overflow-y-auto w">
     <div v-for="i in notesInfo" :key="i.id" @dblclick="emits('select', i.id)">
       <div class="title">
         {{ i.title }}
@@ -41,5 +41,9 @@ const emits = defineEmits<
 
 .bordered-right {
   box-shadow: 1px 0 0 0 #77777720;
+}
+
+.w {
+  width: 200px;
 }
 </style>

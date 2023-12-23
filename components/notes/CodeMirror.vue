@@ -62,7 +62,7 @@ onMounted(/* async */ () => {
   const updateModelDoc = useDebounceFn(() => {
     modelDoc.value = getDoc()
     emits('edit', Date.now())
-  }, 5000)
+  }, 3000)
 
   function setDark (dark: boolean) {
     editor.dispatch({

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const props = defineProps<{
   editAt: number
+  current: number
+  savedAt?: number
+  uploading?: boolean
+  newing?: boolean
 }>()
 
 // eslint-disable-next-line func-call-spacing
@@ -23,25 +27,53 @@ function upload () {
   emits('upload')
   label.value = 'Saved at ' + dateToString(new Date())
 }
+
+watch(
+  () => props.savedAt,
+  (v) => { label.value = 'Saved at ' + dateToString(new Date(v)) }
+)
 </script>
 
 <template>
   <div class="w-full flex items-center justify-between status-bar">
-    <UButton color="white" variant="ghost" @click="emits('fold')">
+    <UButton size="xs" color="white" variant="ghost" @click="emits('fold')">
       Fold
     </UButton>
-    <div>
-      <UButton v-if="editAt > 0" color="white" variant="ghost">
+    <div class="flex items-center">
+      <UButton v-if="editAt > 0" size="xs" color="white" variant="ghost">
         {{ label }}
       </UButton>
-      <UButton color="white" variant="ghost" @click="emits('new')">
-        New
+      <UButton
+        square
+        color="white"
+        variant="ghost"
+        @click="emits('new')"
+      >
+        <template #trailing>
+          <UIcon v-if="newing" name="i-heroicons-arrow-path" class="uploading" />
+          <UIcon v-else name="i-heroicons-plus-circle" />
+        </template>
       </UButton>
-      <UButton color="white" variant="ghost" @click="emits('fetch')">
-        Fetch
+      <UButton
+        square
+        color="white"
+        variant="ghost"
+        @click="emits('fetch')"
+      >
+        <template #trailing>
+          <UIcon name="i-heroicons-arrow-down-circle" />
+        </template>
       </UButton>
-      <UButton color="white" variant="ghost" @click="upload">
-        Upload
+      <UButton
+        square
+        color="white"
+        variant="ghost"
+        @click="upload"
+      >
+        <template #trailing>
+          <UIcon v-if="uploading" name="i-heroicons-arrow-path" class="uploading" />
+          <UIcon v-else name="i-heroicons-arrow-up-circle" />
+        </template>
       </UButton>
     </div>
   </div>
@@ -50,5 +82,17 @@ function upload () {
 <style scoped>
 .status-bar {
   box-shadow: 0 -1px 0 0 #77777720;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.uploading {
+  animation: rotating 2s linear infinite;
 }
 </style>
